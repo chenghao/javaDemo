@@ -7,43 +7,43 @@ import java.nio.channels.SocketChannel;
 
 public class SocketReadHandler implements Runnable {
 
-	final SocketChannel socket;
-	final SelectionKey sk;
+    final SocketChannel socket;
+    final SelectionKey sk;
 
-	static final int READING = 0, SENDING = 1;
-	int state = READING;
+    static final int READING = 0, SENDING = 1;
+    int state = READING;
 
-	public SocketReadHandler(Selector sel, SocketChannel c) throws IOException {
+    public SocketReadHandler(Selector sel, SocketChannel c) throws IOException {
 
-		socket = c;
+        socket = c;
 
-		socket.configureBlocking(false);
-		sk = socket.register(sel, 0);
+        socket.configureBlocking(false);
+        sk = socket.register(sel, 0);
 
-		//将SelectionKey绑定为本Handler 下一步有事件触发时，将调用本类的run方法。
-		//参看dispatch(SelectionKey k)
-		sk.attach(this);
+        //将SelectionKey绑定为本Handler 下一步有事件触发时，将调用本类的run方法。
+        //参看dispatch(SelectionKey k)
+        sk.attach(this);
 
-		//同时将SelectionKey标记为可读，以便读取。
-		sk.interestOps(SelectionKey.OP_READ);
-		sel.wakeup();
-	}
+        //同时将SelectionKey标记为可读，以便读取。
+        sk.interestOps(SelectionKey.OP_READ);
+        sel.wakeup();
+    }
 
-	public void run() {
-		try {
-			// test.read(socket,input);
-			//readRequest() ;
-		} catch (Exception ex) {
-			System.err.println("readRequest error" + ex);
-		}
-	}
+    public void run() {
+        try {
+            // test.read(socket,input);
+            //readRequest() ;
+        } catch (Exception ex) {
+            System.err.println("readRequest error" + ex);
+        }
+    }
 
-	/**
-	* 处理读取data
-	* @param key
-	* @throws Exception
-	*/
-	/*private void readRequest() throws Exception {
+    /**
+     * 处理读取data
+     * @param key
+     * @throws Exception
+     */
+    /*private void readRequest() throws Exception {
 
 	ByteBuffer input = ByteBuffer.allocate(1024);
 	input.clear();

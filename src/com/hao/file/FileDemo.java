@@ -8,55 +8,57 @@ import java.io.FileOutputStream;
 
 /**
  * 将文件先读入到byte数组，然后从byte数组写入到文件的例子
- * @author Administrator
  *
+ * @author Administrator
  */
 public class FileDemo {
 
-	public static void main(String[] args) {
-		FileDemo fileDemo = new FileDemo();
-		
-		byte[] b = fileDemo.fileToByte("F:\\googleDownloads\\jdk-7u21-windows-i586.exe");
-		
-		fileDemo.byteToFile("f:\\jdk-7u21-windows-i586_demo.exe", b);
-	}
+    public static void main(String[] args) {
+        FileDemo fileDemo = new FileDemo();
 
-	/**
-	 * 将file转换为byte数组
-	 * @param fileName
-	 * @return
-	 */
-	public byte[] fileToByte(String fileName) {
-		byte[] b = null;
-		try {
-			File file = new File(fileName);
+        byte[] b = fileDemo.fileToByte("F:\\googleDownloads\\jdk-7u21-windows-i586.exe");
 
-			b = new byte[(int) file.length()];
-			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+        fileDemo.byteToFile("f:\\jdk-7u21-windows-i586_demo.exe", b);
+    }
 
-			bis.read(b);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    /**
+     * 将file转换为byte数组
+     *
+     * @param fileName
+     * @return
+     */
+    public byte[] fileToByte(String fileName) {
+        byte[] b = null;
+        try {
+            File file = new File(fileName);
 
-		return b;
-	}
+            b = new byte[(int) file.length()];
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 
-	/**
-	 * 将byte数组里的数据保存到文件里面
-	 * @param fileName
-	 * @param fileContent
-	 */
-	public void byteToFile(String fileName, byte[] fileContent) {
-		File file = new File(fileName);
-		try {
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-			bos.write(fileContent);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            bis.read(b);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return b;
+    }
+
+    /**
+     * 将byte数组里的数据保存到文件里面
+     *
+     * @param fileName
+     * @param fileContent
+     */
+    public void byteToFile(String fileName, byte[] fileContent) {
+        File file = new File(fileName);
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+            bos.write(fileContent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
