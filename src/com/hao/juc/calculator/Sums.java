@@ -1,5 +1,6 @@
 package com.hao.juc.calculator;
 
+import java.lang.management.ManagementFactory;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -56,5 +57,16 @@ public class Sums {
 
         long endTime = System.currentTimeMillis();
         System.out.println(endTime - beginTime);
+        /////////////////////////////////////////////////////////////////////////////////////
+        long beginTime2 = System.currentTimeMillis();
+
+        long l = 0;
+        for(long i = 0; i <= 1000000000; i++){
+            l = l + i;
+        }
+        System.out.println(l);
+
+        long endTime2 = System.currentTimeMillis();
+        System.out.println(endTime2 - beginTime2);
     }
 }
